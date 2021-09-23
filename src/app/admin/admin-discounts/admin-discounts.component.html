@@ -1,0 +1,55 @@
+<div class="input-group mb-3">
+  <input type="text" class="form-control">
+  <button data-bs-toggle="modal" data-bs-target="#discountModal" class="btn btn-outline-secondary" type="button">
+    Create
+  </button>
+</div>
+<hr>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Description</th>
+    <th scope="col">Image</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let d of adminDiscounts">
+    <td>{{ d.id }}</td>
+    <td>{{ d.description | slice:0:50 }} ...</td>
+    <td>
+      <img [src]="d.imagePath" alt="" width="100px">
+    </td>
+    <td>
+      <div class="actions">
+        <button (click)="editDiscount(d)" data-bs-toggle="modal" data-bs-target="#discountModal" class="btn btn-outline-dark mx-3">Edit</button>
+        <button class="btn btn-outline-dark" (click)="deleteDiscount(d)">Delete</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="discountModal" tabindex="-1" aria-labelledby="discountModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="discountModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea [(ngModel)]="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveDiscount()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
